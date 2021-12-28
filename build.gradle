@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+
+group 'net.megavex'
+version '1.0.0'
+
+repositories {
+    maven { url = uri("https://jitpack.io/") }
+
+    mavenLocal()
+    mavenCentral()
+
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+
+        content {
+            includeGroup 'org.spigotmc'
+        }
+    }
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+tasks.build {
+    dependsOn(shadowJar)
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+
+    def libraryVersion = 'a886cb40ac'
+    /*
+    implementation 'com.github.MegavexNetwork.scoreboard-library:implementation:' + libraryVersion
+    // I want this plugin to support 1.18 & 1.8, so I'll shade both version implementations:
+    implementation 'com.github.MegavexNetwork.scoreboard-library:v1_8_R3:' + libraryVersion
+    implementation 'com.github.MegavexNetwork.scoreboard-library:v1_18_R1:' + libraryVersion
+     */
+
+    implementation 'net.megavex.scoreboardlibrary:implementation:1.0.0'
+    implementation 'net.megavex.scoreboardlibrary:v1_8_R3:1.0.0'
+    implementation 'net.megavex.scoreboardlibrary:v1_18_R1:1.0.0'
+
+    // If you're targeting PaperMC, you don't need to shade Adventure:
+    implementation 'net.kyori:adventure-platform-bukkit:4.0.1'
+}
+
+shadowJar {
+    def prefix = 'net.vytskalt.scoreboardlibraryexample.lib.'
+    relocate 'org.jetbrains', prefix + 'jetbrains'
+    relocate 'org.intellij', prefix + 'intellij'
+    relocate 'net.megavex.scoreboardlibrary.', prefix + 'scoreboardlibrary'
+}

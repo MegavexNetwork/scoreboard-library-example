@@ -1,0 +1,5 @@
+name: ScoreboardLibraryExample
+version: 1.0.0
+main: net.megavex.scoreboardlibraryexample.ExamplePlugin
+api-version: 1.18
+softdepend: [ ProtocolSupport ]
