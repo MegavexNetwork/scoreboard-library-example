@@ -36,7 +36,7 @@ dependencies {
     implementation 'com.github.MegavexNetwork.scoreboard-library:implementation:' + libraryVersion
     // I want this plugin to support 1.18 & 1.8, so I'll shade both version implementations:
     implementation 'com.github.MegavexNetwork.scoreboard-library:v1_8_R3:' + libraryVersion
-    implementation 'com.github.MegavexNetwork.scoreboard-library:v1_18_R1:' + libraryVersion
+    implementation 'com.github.MegavexNetwork.scoreboard-library:v1_18_R2:' + libraryVersion
 
     //implementation 'net.megavex.scoreboardlibrary:implementation:1.0.0'
     //implementation 'net.megavex.scoreboardlibrary:v1_8_R3:1.0.0'
