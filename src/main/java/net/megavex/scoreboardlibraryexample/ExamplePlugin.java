@@ -1,5 +1,6 @@
 package net.megavex.scoreboardlibraryexample;
 
+import java.util.logging.Level;
 import net.kyori.adventure.translation.GlobalTranslator;
 import net.megavex.scoreboardlibrary.ScoreboardLibraryImplementation;
 import net.megavex.scoreboardlibrary.api.ScoreboardLibrary;
@@ -9,39 +10,37 @@ import net.megavex.scoreboardlibraryexample.util.TestTranslator;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.logging.Level;
-
 public class ExamplePlugin extends JavaPlugin implements Listener {
 
-    private final TestTranslator translator = new TestTranslator();
-    private ScoreboardManager scoreboardManager;
+  private final TestTranslator translator = new TestTranslator();
+  private ScoreboardManager scoreboardManager;
 
-    @Override
-    public void onEnable() {
-        System.setProperty(ScoreboardLibrary.NAMESPACE + ".debug", "true"); // Enable debug output
+  @Override
+  public void onEnable() {
+    System.setProperty(ScoreboardLibrary.NAMESPACE + ".debug", "true"); // Enable debug output
 
-        try {
-            ScoreboardLibraryImplementation.init();
-        } catch (ScoreboardLibraryLoadException e) {
-            getLogger().log(Level.SEVERE, "Couldn't load ScoreboardLibrary", e);
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
-
-        GlobalTranslator.translator().addSource(translator);
-        scoreboardManager = ScoreboardManager.scoreboardManager(this);
-        new TeamsExample(this);
-        new AbstractSidebarExample(this);
+    try {
+      ScoreboardLibraryImplementation.init();
+    } catch (ScoreboardLibraryLoadException e) {
+      getLogger().log(Level.SEVERE, "Couldn't load ScoreboardLibrary", e);
+      getServer().getPluginManager().disablePlugin(this);
+      return;
     }
 
-    @Override
-    public void onDisable() {
-        GlobalTranslator.translator().removeSource(translator);
-        if (scoreboardManager != null) scoreboardManager.close();
-        ScoreboardLibraryImplementation.close();
-    }
+    GlobalTranslator.translator().addSource(translator);
+    scoreboardManager = ScoreboardManager.scoreboardManager(this);
+    new TeamsExample(this);
+    new AbstractSidebarExample(this);
+  }
 
-    public ScoreboardManager scoreboardManager() {
-        return scoreboardManager;
-    }
+  @Override
+  public void onDisable() {
+    GlobalTranslator.translator().removeSource(translator);
+    if (scoreboardManager != null) scoreboardManager.close();
+    ScoreboardLibraryImplementation.close();
+  }
+
+  public ScoreboardManager scoreboardManager() {
+    return scoreboardManager;
+  }
 }
