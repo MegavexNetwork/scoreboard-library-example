@@ -1,5 +1,8 @@
 package net.megavex.scoreboardlibraryexample;
 
+import java.awt.Color;
+import java.util.Collection;
+import java.util.function.Supplier;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
@@ -16,10 +19,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.awt.*;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.function.Supplier;
 
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.Component.translatable;

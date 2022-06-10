@@ -28,7 +28,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
             return;
         }
 
-        GlobalTranslator.get().addSource(translator);
+        GlobalTranslator.translator().addSource(translator);
         scoreboardManager = ScoreboardManager.scoreboardManager(this);
         new TeamsExample(this);
         new AbstractSidebarExample(this);
@@ -36,7 +36,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        GlobalTranslator.get().removeSource(translator);
+        GlobalTranslator.translator().removeSource(translator);
         if (scoreboardManager != null) scoreboardManager.close();
         ScoreboardLibraryImplementation.close();
     }
